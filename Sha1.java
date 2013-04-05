@@ -5,15 +5,17 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sha1 {
     private static final int BUFFER_SIZE = 8192;
-    public static void main(String[] args){
-        File file = new File(args[0]);
-        System.out.println(compute(file)+" " + file);
-    }
 
     public static String compute(File file){
+        if( file.isDirectory()){
+            throw new RuntimeException("can't compute hash on folders");
+        }
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             InputStream fis = new FileInputStream(file);
@@ -38,5 +40,5 @@ public class Sha1 {
             throw new RuntimeException(e);
         }
     }
-
+    
 }

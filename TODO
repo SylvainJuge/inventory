@@ -1,15 +1,15 @@
-- compute sha1 for single file
+x compute sha1 for single file
 
-- create blob object
+x create tree item object
     - hash
+    - name
+    - list of children
 
-- create tree object
-    - list of [ blob, file name ]
-    - hash : sha1 of all items above
+x print index content in ascii
 
 - compute sha1 for tree object
 
-- objects storage from/to text files
+- data structuresdata structures  from/to text files
     - write blob
     - read blob
     - write tree
