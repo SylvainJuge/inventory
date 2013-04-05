@@ -1,0 +1,23 @@
+- compute sha1 for single file
+
+- create blob object
+    - hash
+
+- create tree object
+    - list of [ blob, file name ]
+    - hash : sha1 of all items above
+
+- compute sha1 for tree object
+
+- objects storage from/to text files
+    - write blob
+    - read blob
+    - write tree
+    - read tree
+
+- compare indexes
+    - simple comparison (compare sorted lists of hashes)
+    - bloom filter to compute intersection fast ?
+
+- find duplicates in different tree locations
+    -> is there a list of all tree objects where a blob is stored (reverse link)?
