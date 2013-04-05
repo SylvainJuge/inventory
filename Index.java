@@ -13,8 +13,8 @@ public class Index {
         this.root = TreeItem.root();
         this.items = new ArrayList<>();
     }
-    public TreeItem getRoot(){ return root; }
-    public List<TreeItem> getChildren(){ return items; }
+    public List<TreeItem> getRootItems(){ return root.getChildren(); }
+    public List<TreeItem> getItems(){ return items; }
 
     public void print(PrintStream out){
         Deque<TreeItem> stack = new ArrayDeque<>();

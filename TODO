@@ -6,6 +6,10 @@ x create tree item object
     - list of children
 
 x print index content in ascii
+x hide root object in tree
+x rename TreeItem to "Item"
+
+- filter files
 
 - compute sha1 for tree object
 
