@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Item {
 
-    private String hash;
-    private String name;
-    private List<Item> children;
+    private static final char FIELD_SEPARATOR = '\n';
+
+    private final String hash;
+    private final String name;
+    private final List<Item> children;
 
     public String getHash(){ return hash; }
     public String getName(){ return name; }
@@ -23,8 +25,17 @@ public class Item {
     }
 
     public static Item tree(String name, List<Item> children){
-        return new Item(null, name, children);
+        StringBuilder sb = new StringBuilder(name);
+        sb.append(FIELD_SEPARATOR);
+        for(Item i:children){
+            sb.append(FIELD_SEPARATOR);
+            sb.append(i.getHash());
+            sb.append(FIELD_SEPARATOR);
+            sb.append(i.getName());
+        }
+        return new Item(Sha1.compute(sb.toString()), name, children);
     }
+
 
     public static Item fromFile(File f){
         return new Item(Sha1.compute(f), f.getName(), null);
