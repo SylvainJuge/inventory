@@ -31,15 +31,6 @@ public class Sha1 {
         return compute(input);
     }
 
-    // compute sha1 from a folder structure whose contents sha1s are known
-    // result sha1 is a combination of all those sha1s
-    public static String compute(Item item){
-        if(item.isFile()){
-            throw new RuntimeException("only computes hashes on tree items");
-        }
-        return "#folder# "+item.getName();
-    }
-
     public static String compute(File file){
         if( file.isDirectory()){
             throw new RuntimeException("can't compute hash on folders");
