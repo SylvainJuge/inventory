@@ -11,11 +11,17 @@ x rename TreeItem to "Item"
 x mavenize project
 x make jar executable
 x create packages
+x compute sha1 for tree object
 
 - filter files
-- compute sha1 for tree object
+
+- command line interface
+    - print analysis outpout as ascii tree
 
 - bootstrap tests
+
+- enhance sha1 on tree objects
+    - don't use string representation of children hash(es)
 
 - data structures structures  from/to text files
     - write blob
