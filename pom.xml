@@ -69,7 +69,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Main-Class>Main</Main-Class>
+                            <Main-Class>sylvain.juge.inventory.Main</Main-Class>
                         </manifestEntries>
                     </archive>
                 </configuration>

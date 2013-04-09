@@ -1,3 +1,4 @@
+package sylvain.juge.inventory;
 
 import java.io.File;
 

@@ -10,11 +10,11 @@ x hide root object in tree
 x rename TreeItem to "Item"
 x mavenize project
 x make jar executable
+x create packages
 
 - filter files
 - compute sha1 for tree object
 
-- create packages
 - bootstrap tests
 
 - data structures structures  from/to text files

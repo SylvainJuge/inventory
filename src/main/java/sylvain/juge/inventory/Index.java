@@ -1,3 +1,5 @@
+package sylvain.juge.inventory;
+
 import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayDeque;
