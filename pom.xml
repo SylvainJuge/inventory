@@ -28,6 +28,7 @@
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert-core</artifactId>
             <version>2.0M8</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -49,6 +50,13 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <!-- fork required for "compilerVersion" to be effective -->
+                    <fork>true</fork>
+                    <compilerVersion>${java.version}</compilerVersion>
+                    <compilerArguments>
+                        <Xlint:all/>
+                        <Werror/>
+                    </compilerArguments>
                 </configuration>
             </plugin>
             <plugin>
