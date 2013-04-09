@@ -8,12 +8,16 @@ x create tree item object
 x print index content in ascii
 x hide root object in tree
 x rename TreeItem to "Item"
+x mavenize project
+x make jar executable
 
 - filter files
-
 - compute sha1 for tree object
 
-- data structuresdata structures  from/to text files
+- create packages
+- bootstrap tests
+
+- data structures structures  from/to text files
     - write blob
     - read blob
     - write tree
