@@ -14,10 +14,6 @@ public class Item {
     public String getName(){ return name; }
     public List<Item> getChildren(){ return children; }
 
-    public boolean isFile(){
-        return children.isEmpty();
-    }
-
     private Item(String hash, String name, List<Item> children){
         this.hash = hash;
         this.name = name;
@@ -36,13 +32,12 @@ public class Item {
         return new Item(Sha1.compute(sb.toString()), name, children);
     }
 
-
     public static Item fromFile(File f){
         return new Item(Sha1.compute(f), f.getName(), null);
     }
 
-    public static Item root(){
-        return new Item(null, null, null);
+    public boolean isFile(){
+        return children.isEmpty();
     }
 
 }

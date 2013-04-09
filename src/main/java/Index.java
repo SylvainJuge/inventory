@@ -6,19 +6,21 @@ import java.util.Deque;
 import java.util.List;
 
 public class Index {
-    private Item root;
+    private List<Item> rootItems;
     private List<Item> items;
 
     private Index(){
-        this.root = Item.root();
         this.items = new ArrayList<>();
+        this.rootItems = new ArrayList<>();
     }
-    public List<Item> getRootItems(){ return root.getChildren(); }
+    public List<Item> getRootItems(){ return rootItems; }
     public List<Item> getItems(){ return items; }
 
     public void print(PrintStream out){
         Deque<Item> stack = new ArrayDeque<>();
-        stack.add(root);
+        for(int i=(rootItems.size()-1);0<=i;i--){
+            stack.add(rootItems.get(i));
+        }
         while( !stack.isEmpty()){
             Item item = stack.removeFirst();
             out.println(String.format("%s | %s", item.getHash(), item.getName()));
@@ -34,7 +36,7 @@ public class Index {
     public static Index fromFolder(File folder){
         Index result = new Index();
         for(File child:folder.listFiles()){
-            result.root.getChildren().add(result.addRecursively(child));
+            result.rootItems.add(result.addRecursively(child));
         }
         return result;
     }
