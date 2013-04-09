@@ -1,2 +1,3 @@
 #!/bin/bash
-javac *.java && java Main .
+
+java -jar ./target/inventory-0.1-SNAPSHOT.jar .
