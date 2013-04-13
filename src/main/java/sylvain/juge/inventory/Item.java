@@ -1,10 +1,11 @@
 package sylvain.juge.inventory;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Item {
+public class Item implements Comparable<Item> {
 
     private static final char FIELD_SEPARATOR = '\n';
 
@@ -14,7 +15,7 @@ public class Item {
 
     public String getHash(){ return hash; }
     public String getName(){ return name; }
-    public List<Item> getChildren(){ return children; }
+    public List<Item> getChildren(){ return children; } // TODO : copy on access or use immutable collection
 
     private Item(String hash, String name, List<Item> children){
         this.hash = hash;
@@ -23,23 +24,41 @@ public class Item {
     }
 
     public static Item tree(String name, List<Item> children){
-        StringBuilder sb = new StringBuilder(name);
-        sb.append(FIELD_SEPARATOR);
-        for(Item i:children){
+        StringBuilder sb = new StringBuilder();
+        List<Item> childList = new ArrayList<>();
+        childList.addAll(children);
+        Collections.sort(childList);
+        for(Item i:childList){
             sb.append(FIELD_SEPARATOR);
             sb.append(i.getHash());
             sb.append(FIELD_SEPARATOR);
             sb.append(i.getName());
         }
-        return new Item(Sha1.compute(sb.toString()), name, children);
+        return new Item(Sha1.compute(sb.toString()), name, childList);
     }
 
     public static Item fromFile(File f){
         return new Item(Sha1.compute(f), f.getName(), null);
     }
 
+    /**
+     * Builds an Item from file name and hash
+     * @param name file name
+     * @param hash file hash
+     * @return
+     */
+    public static Item file(String name, String hash){
+        return new Item(hash, name, null);
+    }
+
     public boolean isFile(){
         return children.isEmpty();
     }
 
+    @Override
+    public int compareTo(Item o) {
+        int result = hash.compareTo(o.hash);
+        if( 0 == result) result = name.compareTo(o.name);
+        return result;
+    }
 }
