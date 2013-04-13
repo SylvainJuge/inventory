@@ -18,6 +18,16 @@ x compute sha1 for tree object
 - command line interface
     - print analysis outpout as ascii tree
 
+- find what @SafeVarargs means
+    -> probably to explain that method properly handles
+    single or multiple values. like when underlying api provides
+        - a method for a single value
+        - a method for multiple values
+    -> and calling parent method properly handles choosing the right method to call
+        like when executing a command line :
+        - single param API : full command
+        - multiple param API : separated command arguments
+
 - bootstrap tests
 
 - enhance sha1 on tree objects
