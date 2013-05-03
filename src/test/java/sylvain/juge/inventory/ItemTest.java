@@ -12,7 +12,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class ItemTest {
 
     @Test
-    public void tree_without_content_but_different_name_must_have_same_hash(){
+    public void trees_without_content_but_different_name_must_have_same_hash(){
         Item tree1 = Item.tree("tree1", new ArrayList<Item>());
         Item tree2 = Item.tree("tree2", new ArrayList<Item>());
 

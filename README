@@ -1,0 +1,15 @@
+Idea : index content stored in a set of folders and find duplicates
+
+
+# identical files in different locations
+hash1 -> /path/location2
+hash1 -> /path/location1
+
+# hash only includes content, not filenames
+- file hash : hash of its content
+- folder hash : hash of its contents hashes
+
+- file has a reference on folder, thus when we have identical hashes we can compare locations
+- folder has a reference on parent folder (if any), thus when we have identical hashes we can compare locations
+
+index contains entries sorted, with folders before files for easy compare

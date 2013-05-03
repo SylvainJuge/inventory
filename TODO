@@ -13,12 +13,15 @@ x make jar executable
 x create packages
 x compute sha1 for tree object
 
+x bootstrap tests
+
 - filter files
 
 - command line interface
     - print analysis outpout as ascii tree
 
 - find what @SafeVarargs means
+    -> according to javadoc : calling method can put types that shouldn't fit 
     -> probably to explain that method properly handles
     single or multiple values. like when underlying api provides
         - a method for a single value
@@ -28,7 +31,6 @@ x compute sha1 for tree object
         - single param API : full command
         - multiple param API : separated command arguments
 
-- bootstrap tests
 
 - enhance sha1 on tree objects
     - don't use string representation of children hash(es)
