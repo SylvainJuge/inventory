@@ -1,5 +1,7 @@
 package sylvain.juge.inventory;
 
+import sylvain.juge.inventory.util.ReadOnlyList;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Item implements Comparable<Item> {
 
     public String getHash(){ return hash; }
     public String getName(){ return name; }
-    public List<Item> getChildren(){ return children; } // TODO : copy on access or use immutable collection
+    public List<Item> getChildren(){ return new ReadOnlyList(children); }
 
     private Item(String hash, String name, List<Item> children){
         this.hash = hash;

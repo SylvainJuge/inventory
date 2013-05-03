@@ -1,6 +1,7 @@
 package sylvain.juge.inventory;
 
 import org.testng.annotations.Test;
+import sylvain.juge.inventory.util.ReadOnlyList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,8 +34,7 @@ public class ItemTest {
     }
 
     @Test
-    public void tree_children_defensive_copy(){
-
+    public void tree_children_is_read_only(){
 
         Item child1 = Item.file("name","hash");
         List<Item> items = new ArrayList<>();
@@ -42,17 +42,7 @@ public class ItemTest {
 
         Item tree = Item.tree("tree1", items);
 
-        assertThat(tree.getChildren()).isNotEmpty();
-        items.clear();
-        assertThat(tree.getChildren()).isNotEmpty();
-        tree.getChildren().clear();
-        assertThat(tree.getChildren()).isNotEmpty();
-
-
-
-
-
-
+        assertThat(tree.getChildren()).isInstanceOf(ReadOnlyList.class);
 
     }
 
