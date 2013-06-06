@@ -1,0 +1,53 @@
+Idea : index content stored in a set of folders and find duplicates
+
+
+# use cases
+# - find identical files in different locations
+hash1 -> /path/location2
+hash1 -> /path/location1
+
+# - report duplications with adequate aggregation
+# when full directories are duplicated, we only report them, not their files
+folderHash1 -> /folder/1
+folderHash1 -> /folder/2
+
+# 2 hash types : content & location
+- file
+    - parent (containing folder)
+    - content hash
+        - hashed content of file
+
+- folder
+    0000hash0000 file1 
+    0000hash0001 file2 
+
+
+- filtering files with same parent folder hash helps to find files in the same directory
+
+GIT does not have "back" references to parent
+    -> it only has top reference tree through HEAD commit
+    -> let's try without any back-link
+
+- usage scenarios
+    -> build/update index from folder
+        - create initial index
+        - make index up-to-date with FS
+        - detect changes
+            - content on disk but not in index
+            - content in index but not on disk
+            - file / folder content changed (hash mismatch)
+        - allow filtering
+    -> find duplicates in 1..n indexes
+        - duplicate files & folders
+        - folders with almost same files & folders (not exact match)
+    -> find not duplicated files
+        - see files that are not properly backed-up
+        - allow filtering
+    -> files operations
+        - remove unnecessary duplicates
+        - merge folders without loosing stuff
+        - move files between locations
+    -> offline file operations
+        - plan what need to be done on any device : mobile, desktop, web, ...
+        - execute tasks when possible (devices connected)
+
