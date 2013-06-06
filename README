@@ -13,3 +13,4 @@ hash1 -> /path/location1
 - folder has a reference on parent folder (if any), thus when we have identical hashes we can compare locations
 
 index contains entries sorted, with folders before files for easy compare
+
