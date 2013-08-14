@@ -17,7 +17,7 @@ public class Item implements Comparable<Item> {
 
     public String getHash(){ return hash; }
     public String getName(){ return name; }
-    public List<Item> getChildren(){ return new ReadOnlyList(children); }
+    public List<Item> getChildren(){ return Collections.unmodifiableList(children); }
 
     private Item(String hash, String name, List<Item> children){
         this.hash = hash;

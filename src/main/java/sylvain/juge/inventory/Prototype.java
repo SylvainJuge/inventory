@@ -3,16 +3,72 @@ package sylvain.juge.inventory;
 
 import java.io.File;
 import java.io.PrintStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
 public class Prototype {
+
+
+    private static class IndexEntry {
+        String hash;
+        Path path;
+    }
+
+    private static class Index {
+
+        private final static String INDEX_FILE_NAME = ".inventory";
+        private final Path root;
+
+        private Index(Path root){
+            this.root = root;
+        }
+
+        /**
+         * creates a new empty index in folder
+         * @param path folder to index (and where index file is stored)
+         * @return empty index
+         */
+        public static Index newIndex(Path path){
+            return new Index(path);
+        }
+
+        /**
+         * loads an existing index in directory
+         * @param path folder where the index file is stored
+         */
+        public static Index loadIndex(Path path){
+            return null;
+        }
+
+        /** refresh the whole index with filesystem */
+        public void refresh(){
+
+        }
+
+
+
+        public List<FileEntry> getEntries(){
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
 
+        Path projectDir = getProjectDir(Prototype.class);
+
+        Index index = Index.newIndex();
+
+
+        // add items to index
+        // store index into file
+        // load index from file
+
+        /*
         long start = System.currentTimeMillis();
-        Index index = Index.fromFolder(Paths.get(args[0]));
+        OldIndex index = OldIndex.fromFolder(Paths.get(args[0]));
         long end = System.currentTimeMillis();
 
         long total = end - start;
@@ -29,7 +85,14 @@ public class Prototype {
                 System.out.println("  " + path);
             }
         }
+        */
 
+    }
+
+    private static Path getProjectDir(Class<?> type) {
+        URL classUrl = type.getClassLoader().getResource(type.getName() + ".class");
+        // TODO : retrieve current project folder
+        return null;
     }
 
     private static final class IndexStatistics {
@@ -43,13 +106,13 @@ public class Prototype {
         }
         public void end(long endMs){
             if( endMs < startTime){
-                throw new RuntimeException("end time must be greather or equal than start time");
+                throw new RuntimeException("end time must be greater than or equal to start time");
             }
             totalTimeMs = endMs - startTime;
         }
         public void addBytes(int count){
             if( count < 0){
-                throw new RuntimeException("byte count must be greather or equal to zero");
+                throw new RuntimeException("byte count must be greater or equal to zero");
             }
             bytesCount += count;
         }
@@ -70,19 +133,19 @@ public class Prototype {
         }
     }
 
-    private static final class Index {
+    private static final class OldIndex {
 
         private HashMap<String,FileEntry> content;
 
-        private Index(){
+        private OldIndex(){
             content = new HashMap<>();
         }
 
-        public static Index fromFolder(Path folder){
+        public static OldIndex fromFolder(Path folder){
             if(!Files.isDirectory(folder)){
                 throw new RuntimeException(String.format("%s is not a readable directory",folder));
             }
-            Index index = new Index();
+            OldIndex index = new OldIndex();
             // stack of folders to explore, used as DFS
             Deque<File> stack = new LinkedList<>();
             stack.add(folder.toFile());

@@ -1,5 +1,25 @@
 Idea : index content stored in a set of folders and find duplicates
 
+--------------------------
+design simplification :
+- index contains only :
+    - relative path to file 
+    - hash of file
+
+It does not contains folders, whose aggregation is computed later
+Thus, indexing means only reading files and writing their hash
+to the index file.
+
+- updating the index :
+    - triggered filesystem events (if running java)
+    - triggered with inotify or equivalent
+    - scheduled
+    - optional heuristics for better efficiency
+
+index format :
+hash(40bytes) -> relative/path/to/file.ext
+
+--------------------------
 
 # use cases
 # - find identical files in different locations

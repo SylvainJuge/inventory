@@ -8,11 +8,11 @@ public final class ReadOnlyList<T> extends AbstractList<T> {
 
     @SafeVarargs // safe because we don't try to alter varargs param array
     public ReadOnlyList(T... values){
-        this.list = Arrays.asList(values);
+        this(Arrays.asList(values));
     }
 
     public ReadOnlyList(List<T> list){
-        this.list = new ArrayList<>(list);
+        this.list = Collections.unmodifiableList(list);
     }
 
     @Override
