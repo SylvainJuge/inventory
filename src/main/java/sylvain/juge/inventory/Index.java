@@ -1,61 +1,92 @@
 package sylvain.juge.inventory;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.util.ArrayDeque;
+import sylvain.juge.inventory.util.NotImplementedException;
+
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 
-public class Index {
-    private List<Item> rootItems;
-    private List<Item> items;
+class Index {
 
-    private Index(){
-        this.items = new ArrayList<>();
-        this.rootItems = new ArrayList<>();
-    }
-    public List<Item> getRootItems(){ return rootItems; }
-    public List<Item> getItems(){ return items; }
+    private final static String INDEX_FILE_NAME = ".inventory";
+    private final Path root;
+    private List<IndexEntry> entries;
 
-    public void print(PrintStream out){
-        Deque<Item> stack = new ArrayDeque<>();
-        for(int i=(rootItems.size()-1);0<=i;i--){
-            stack.add(rootItems.get(i));
-        }
-        while( !stack.isEmpty()){
-            Item item = stack.removeFirst();
-            out.println(String.format("%s | %s", item.getHash(), item.getName()));
-            if(!item.isFile()){
-                List<Item> children = item.getChildren();
-                for(int i=(children.size()-1);0<=i;i--){
-                    stack.addFirst(children.get(i));
-                }
-            }
-        }
+    Index(Path root){
+        this.root = root;
+        this.entries = new ArrayList<>();
     }
 
-    public static Index fromFolder(File folder){
-        Index result = new Index();
-        for(File child:folder.listFiles()){
-            result.rootItems.add(result.addRecursively(child));
-        }
-        return result;
+    public Path getRoot(){
+        return root;
     }
 
-    public Item addRecursively(File child){
-        String hash = null;
-        Item item = null;
-        if(!child.isDirectory()){
-            item = Item.fromFile(child) ;
-        } else {
-            List<Item> childItems = new ArrayList<>();
-            for(File f:child.listFiles()){
-                childItems.add(addRecursively(f));
-            }
-            item = Item.tree(child.getName(), childItems);
+    /**
+     * creates a new empty index in folder
+     * @param path folder to index
+     * @return empty index
+     */
+    public static Index newIndex(Path path){
+        return new Index(path);
+    }
+
+    /**
+     * loads an existing index in directory
+     * @param path folder where the index file is stored
+     */
+    public static Index loadIndex(Path path){
+        throw new NotImplementedException();
+    }
+
+    private static class UpdateFileVisitor extends SimpleFileVisitor<Path> {
+
+        private final List<IndexEntry> entries;
+
+        private UpdateFileVisitor() {
+            this.entries = new ArrayList<>();
         }
-        items.add(item);
-        return item;
+
+        @Override
+        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+            IndexEntry entry = new IndexEntry("", file);
+            entries.add(entry);
+            return FileVisitResult.CONTINUE;
+        }
+
+        public List<IndexEntry> getEntries(){
+            return entries;
+        }
+    }
+
+    /** refresh the whole index with filesystem */
+    public void update(){
+        UpdateFileVisitor visitor = new UpdateFileVisitor();
+        try {
+            Files.walkFileTree(root, visitor);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.entries = visitor.getEntries();
+    }
+
+    /** writes index into its root folder */
+    public void write(){
+        throw new NotImplementedException();
+    }
+
+    /** writes index to a specific file
+     * @param file where to store index data */
+    public void write(Path file){
+        throw new NotImplementedException();
+    }
+
+
+    public List<IndexEntry> getEntries(){
+        return entries;
     }
 }

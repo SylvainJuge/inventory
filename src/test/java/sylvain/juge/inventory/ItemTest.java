@@ -1,6 +1,7 @@
 package sylvain.juge.inventory;
 
 import org.testng.annotations.Test;
+import sylvain.juge.inventory.old.Item;
 import sylvain.juge.inventory.util.ReadOnlyList;
 
 import java.util.ArrayList;

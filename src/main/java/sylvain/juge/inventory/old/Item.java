@@ -1,6 +1,6 @@
-package sylvain.juge.inventory;
+package sylvain.juge.inventory.old;
 
-import sylvain.juge.inventory.util.ReadOnlyList;
+import sylvain.juge.inventory.Sha1;
 
 import java.io.File;
 import java.util.Collections;
