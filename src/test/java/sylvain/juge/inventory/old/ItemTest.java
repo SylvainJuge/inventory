@@ -1,4 +1,4 @@
-package sylvain.juge.inventory;
+package sylvain.juge.inventory.old;
 
 import org.testng.annotations.Test;
 import sylvain.juge.inventory.old.Item;
