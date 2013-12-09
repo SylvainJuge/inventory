@@ -41,7 +41,6 @@ public class IndexEntryTest {
     @Test
     public void equalsHashCodeWithSameHashCode(){
 
-
         IndexEntry entry1 = new IndexEntry("hash1", Paths.get("dummy"));
 
         // identical strings are the same thanks to compiler,

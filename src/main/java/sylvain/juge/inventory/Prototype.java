@@ -17,7 +17,7 @@ public class Prototype {
         Path projectDir = getProjectDir(Prototype.class);
 
 
-        Path root = Paths.get("D:\\Photos\\2011");
+        Path root = Paths.get("D:\\Photos & Vidéos\\2011");
 
         Index index = Index.newIndex(root);
 

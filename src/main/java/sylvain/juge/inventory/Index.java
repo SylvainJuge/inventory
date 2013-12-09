@@ -11,7 +11,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
-class Index {
+public class Index {
 
     private final static String INDEX_FILE_NAME = ".inventory";
     private final Path root;

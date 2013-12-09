@@ -75,7 +75,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Main-Class>sylvain.juge.inventory.Main</Main-Class>
+                            <Main-Class>sylvain.juge.inventory.old.Main</Main-Class>
                         </manifestEntries>
                     </archive>
                 </configuration>

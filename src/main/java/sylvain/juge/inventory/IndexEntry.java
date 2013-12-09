@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import static sylvain.juge.inventory.util.ParamAssert.notNull;
 
 public final class IndexEntry {
+
     private final String hash;
     private final Path path;
 
