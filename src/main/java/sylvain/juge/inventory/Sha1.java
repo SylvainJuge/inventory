@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** @deprecated use a common implementation for file hashing */
+@Deprecated
 public class Sha1 {
     private static final int BUFFER_SIZE = 8192;
     private static final String HASH_TYPE = "SHA-1";

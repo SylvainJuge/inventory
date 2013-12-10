@@ -6,7 +6,9 @@ import java.nio.file.Path;
 
 import static org.fest.assertions.api.Fail.fail;
 
-/** temporary folder for tests */
+/** temporary folder for tests
+ * @deprecated use memory fs for that purpose */
+@Deprecated
 public final class TempFolder {
 
     private final Path root;

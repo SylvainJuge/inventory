@@ -14,6 +14,8 @@ import java.util.List;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.api.Fail.fail;
 
+/** @deprecated  use memory fs instead */
+@Deprecated
 public class TempFilesTest {
 
     @Test
