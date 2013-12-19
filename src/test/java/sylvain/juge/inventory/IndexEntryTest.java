@@ -12,18 +12,21 @@ public class IndexEntryTest {
 
     @Test(expectedExceptions = InvalidParameterException.class)
     public void nullHashNotAllowed(){
-        new IndexEntry(null, new File("any").toPath());
+        new IndexEntry(null, new File("any").toPath(), 0, 0);
     }
 
     @Test(expectedExceptions = InvalidParameterException.class)
     public void nullPathNotAllowed(){
-        new IndexEntry("", null);
+        new IndexEntry("", null, 0, 0);
     }
+
+    // TODO : negative size and timestamp not allowed
+    // TODO : equals and hashcode size and timestamp
 
     @Test
     public void equalsHashCodeIsReflexive(){
         // a.equals(a)
-        IndexEntry entry = new IndexEntry("hash", Paths.get("dummy"));
+        IndexEntry entry = new IndexEntry("hash", Paths.get("dummy"), 0, 0);
         sameEqualsHashCodeToString(entry, entry);
     }
 
@@ -32,8 +35,8 @@ public class IndexEntryTest {
         // a.equals(b) <=> b.equals(a)
         // identical strings are the same thanks to compiler,
         // thus we have to force them to be different instances
-        IndexEntry entry1 = new IndexEntry("hash"+"", Paths.get("dummy"));
-        IndexEntry entry2 = new IndexEntry("hash"+"", Paths.get("dummy"));
+        IndexEntry entry1 = new IndexEntry("hash"+"", Paths.get("dummy"), 0 , 0);
+        IndexEntry entry2 = new IndexEntry("hash"+"", Paths.get("dummy"), 0, 0);
 
         sameEqualsHashCodeToString(entry1, entry2);
     }
@@ -41,11 +44,11 @@ public class IndexEntryTest {
     @Test
     public void equalsHashCodeWithSameHashCode(){
 
-        IndexEntry entry1 = new IndexEntry("hash1", Paths.get("dummy"));
+        IndexEntry entry1 = new IndexEntry("hash1", Paths.get("dummy"), 0, 0);
 
         // identical strings are the same thanks to compiler,
         // thus we have to force them to be different instances
-        IndexEntry sameHash = new IndexEntry(entry1.getHash()+"",Paths.get("anotherPath"));
+        IndexEntry sameHash = new IndexEntry(entry1.getHash()+"",Paths.get("anotherPath"), 0, 0);
 
         // equals but not same instance
         assertThat(sameHash.getHash()).isEqualTo(entry1.getHash());
@@ -58,11 +61,11 @@ public class IndexEntryTest {
 
     @Test
     public void equalsHashCodeWithSamePath(){
-        IndexEntry entry2 = new IndexEntry("hash1", Paths.get("dummy"));
+        IndexEntry entry2 = new IndexEntry("hash1", Paths.get("dummy"), 0, 0);
 
         // identical strings are the same thanks to compiler,
         // thus we have to force them to be different instances
-        IndexEntry samePathAsEntry2 = new IndexEntry("notSameHash", Paths.get(entry2.getPath().toString()));
+        IndexEntry samePathAsEntry2 = new IndexEntry("notSameHash", Paths.get(entry2.getPath().toString()), 0, 0);
 
         assertThat(samePathAsEntry2.getHash()).isNotEqualTo(entry2.getHash());
 
