@@ -18,7 +18,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>sylvain.juge</groupId>
+            <groupId>com.github.sylvainjuge</groupId>
             <artifactId>fsutils</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
