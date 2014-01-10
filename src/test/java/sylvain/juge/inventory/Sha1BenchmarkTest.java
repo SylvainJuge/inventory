@@ -1,5 +1,6 @@
 package sylvain.juge.inventory;
 
+import com.github.sylvainjuge.fsutils.FileDigest;
 import org.testng.annotations.Test;
 
 
@@ -7,12 +8,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@Test(enabled=false)
 public class Sha1BenchmarkTest {
 
     @Test
-    public void empty_file(){
+    public void empty_file() throws IOException {
         try(TempFile file = new TempFile()){
-            Sha1.compute(file.getPath().toFile());
+            FileDigest digest = new FileDigest("SHA1",8192);
+            digest.digest(file.getPath());
         }
     }
 

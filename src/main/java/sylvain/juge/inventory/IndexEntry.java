@@ -1,7 +1,6 @@
 package sylvain.juge.inventory;
 
 import java.nio.file.Path;
-import java.nio.file.attribute.FileTime;
 
 import static sylvain.juge.inventory.util.ParamAssert.notNull;
 

@@ -3,7 +3,6 @@ package sylvain.juge.inventory;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import sylvain.juge.inventory.util.TempFolder;
 
 import java.nio.file.Path;
 
@@ -11,7 +10,8 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 public class IndexTest {
 
-    private final TempFolder tempFolder = TempFolder.createNew();
+    @SuppressWarnings("deprecation")
+    private final sylvain.juge.inventory.util.TempFolder tempFolder = sylvain.juge.inventory.util.TempFolder.createNew();
 
     @AfterTest
     private void after(){

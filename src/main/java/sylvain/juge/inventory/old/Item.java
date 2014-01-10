@@ -1,8 +1,12 @@
 package sylvain.juge.inventory.old;
 
-import sylvain.juge.inventory.Sha1;
+import com.github.sylvainjuge.fsutils.FileDigest;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,6 +14,12 @@ import java.util.ArrayList;
 public class Item implements Comparable<Item> {
 
     private static final char FIELD_SEPARATOR = '\n';
+
+    private static final String HASH_ALGORITHM = "SHA-1";
+    private static final String ENCODING = "UTF-8";
+    private static final int HASH_BUFFER_SIZE = 8192;
+
+    private static final FileDigest DIGEST = new FileDigest(HASH_ALGORITHM,HASH_BUFFER_SIZE);
 
     private final String hash;
     private final String name;
@@ -36,11 +46,31 @@ public class Item implements Comparable<Item> {
             sb.append(FIELD_SEPARATOR);
             sb.append(i.getName());
         }
-        return new Item(Sha1.compute(sb.toString()), name, childList);
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance(HASH_ALGORITHM);
+            digest.update(sb.toString().getBytes(ENCODING));
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        StringBuilder hash = new StringBuilder();
+        for (byte b : digest.digest()) {
+            hash.append(String.format("%02x", b));
+        }
+
+        return new Item(hash.toString(), name, childList);
     }
 
     public static Item fromFile(File f){
-        return new Item(Sha1.compute(f), f.getName(), null);
+        String sha1;
+        try {
+            sha1 = DIGEST.digest(f.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return new Item(sha1, f.getName(), null);
     }
 
     /**
