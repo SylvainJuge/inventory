@@ -1,6 +1,7 @@
 package sylvain.juge.inventory;
 
 
+import com.google.common.hash.Hashing;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
@@ -23,7 +24,7 @@ public class IndexTest {
 
         Path root = tempFolder.getPath();
 
-        Index index = new Index(root);
+        Index index = Index.newIndex(root, Hashing.sha1());
         assertThat(index.getEntries()).isEmpty();
         assertThat(index.getRoot()).isEqualTo(root);
     }

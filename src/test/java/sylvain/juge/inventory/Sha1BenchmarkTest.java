@@ -1,6 +1,7 @@
 package sylvain.juge.inventory;
 
-import com.github.sylvainjuge.fsutils.FileDigest;
+import com.github.sylvainjuge.fsutils.FileDigester;
+import com.google.common.hash.Hashing;
 import org.testng.annotations.Test;
 
 
@@ -14,7 +15,7 @@ public class Sha1BenchmarkTest {
     @Test
     public void empty_file() throws IOException {
         try(TempFile file = new TempFile()){
-            FileDigest digest = new FileDigest("SHA1",8192);
+            FileDigester digest = new FileDigester(Hashing.sha1(),8192);
             digest.digest(file.getPath());
         }
     }

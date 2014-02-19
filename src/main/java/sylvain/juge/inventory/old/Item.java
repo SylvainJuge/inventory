@@ -1,6 +1,7 @@
 package sylvain.juge.inventory.old;
 
-import com.github.sylvainjuge.fsutils.FileDigest;
+import com.github.sylvainjuge.fsutils.FileDigester;
+import com.google.common.hash.Hashing;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Item implements Comparable<Item> {
     private static final String ENCODING = "UTF-8";
     private static final int HASH_BUFFER_SIZE = 8192;
 
-    private static final FileDigest DIGEST = new FileDigest(HASH_ALGORITHM,HASH_BUFFER_SIZE);
+    private static final FileDigester DIGEST = new FileDigester(Hashing.sha1(),HASH_BUFFER_SIZE);
 
     private final String hash;
     private final String name;
